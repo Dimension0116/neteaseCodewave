@@ -31,29 +31,54 @@
 
 ### 编排
 
+#### 注释
+
+对每个节点进行说明或对整个工作流进行解释
+
+<img width="388" alt="image" src="https://github.com/user-attachments/assets/baf5d855-935a-478f-9b71-05a0e4840828" />
+
+
 #### 开始节点
 
 “开始” 节点是每个对话流/工作流必备的预设节点，不可移除，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容、以及上传的文件等。在开始节点的设置页，你可以看到两部分设置：允许开发者自行添加的输入字段、系统预设的系统变量。
+
+<img width="428" alt="image" src="https://github.com/user-attachments/assets/1f9a0ccc-3997-47df-8260-215a2063a926" />
+
 
 #### LLM
 
 调用大语言模型的能力，处理前置节点中输入的信息（通常是由开始节点输入的自然语言、上传的文件或图片），给出有效的回应信息。在应用编辑页中，点击鼠标右键或轻点上一节点末尾的 + 号，添加节点并选择 LLM。
 
+<img width="429" alt="image" src="https://github.com/user-attachments/assets/1a6bc7d2-b771-4de9-8018-3fbfa4a5ff0e" />
+
+
 #### 知识检索
 
 从知识库中检索与用户问题相关的文本内容，可作为下游 LLM 节点的上下文来使用。
+
+<img width="430" alt="image" src="https://github.com/user-attachments/assets/bf9368b5-8848-489f-9a4f-59990680dadd" />
+
 
 #### 问题分类
 
 通过定义分类描述，问题分类器能够根据用户输入，使用 LLM 推理与之相匹配的分类并输出分类结果，向下游节点提供更加精确的信息。
 
+![image](https://github.com/user-attachments/assets/f7a62cb9-575d-4ba3-ad8b-27cf94f8d738)
+
+
 #### 条件分支
 
 根据 If/else/elif 条件将 Chatflow / Workflow 流程拆分成多个分支。
 
+<img width="435" alt="image" src="https://github.com/user-attachments/assets/e8615d40-e853-4b62-8af8-f8706460482f" />
+
+
 #### 代码执行
 
 代码节点支持运行 Python / NodeJS 代码以在工作流程中执行数据转换。它可以简化你的工作流程，适用于Arithmetic、JSON transform、文本处理等情景。该节点极大地增强了开发人员的灵活性，使他们能够在工作流程中嵌入自定义的 Python 或 Javascript 脚本，并以预设节点无法达到的方式操作变量。通过配置选项，你可以指明所需的输入和输出变量，并撰写相应的执行代码：
+
+<img width="428" alt="image" src="https://github.com/user-attachments/assets/f7d2ef83-be81-4d13-af80-58d313b44e9c" />
+
 
 #### 模板转换
 
@@ -61,21 +86,35 @@
 
 Jinja官方文档：https://docs.jinkan.org/docs/jinja2/
 
+<img width="428" alt="image" src="https://github.com/user-attachments/assets/a50542b2-d1f9-4bd7-a255-db4b6e213e3d" />
+
+
 #### 文档提取器
 
 LLM 自身无法直接读取或解释文档的内容。因此需要将用户上传的文档，通过文档提取器节点解析并读取文档文件中的信息，转化文本之后再将内容传给 LLM 以实现对于文件内容的处理。
 
+<img width="429" alt="image" src="https://github.com/user-attachments/assets/45bf2c5d-5b62-4d50-a063-d963a62bd1a9" />
+
+
 #### 列表操作
+
+相当于CodeWave中列表内置函数
 
 文件列表变量支持同时上传文档文件、图片、音频与视频文件等多种文件。应用使用者在上传文件时，所有文件都存储在同一个Array[File]数组类型变量内，不利于后续单独处理文件。列表操作节点可以在数组变量内提取单独的元素，便于后续节点处理。
 
 Array数据类型意味着该变量的实际值可能为 [1.mp3, 2.png, 3.doc]，大语言模型（LLM）仅支持读取图片文件或文本内容等单一值作为输入变量，无法直接读取数组变量，通常需要配合列表操作节点一起使用。
+
+<img width="428" alt="image" src="https://github.com/user-attachments/assets/d7fd2e17-cb20-4e75-95c2-571a14cc30ac" />
+
 
 #### 变量聚合
 
 将多路分支的变量聚合为一个变量，以实现下游节点统一配置。
 
 变量聚合节点（原变量赋值节点）是工作流程中的一个关键节点，它负责整合不同分支的输出结果，确保无论哪个分支被执行，其结果都能通过一个统一的变量来引用和访问。这在多分支的情况下非常有用，可将不同分支下相同作用的变量映射为一个输出变量，避免下游节点重复定义。
+
+<img width="434" alt="image" src="https://github.com/user-attachments/assets/46004fcd-5c6d-400d-9576-a7041886b09c" />
+
 
 #### 变量赋值
 
@@ -84,6 +123,9 @@ Array数据类型意味着该变量的实际值可能为 [1.mp3, 2.png, 3.doc]�
 用法：通过变量赋值节点，你可以将工作流内的变量赋值到会话变量中用于临时存储，并可以在后续对话中持续引用。
 
 使用场景：将对话过程中的上下文、上传至对话框的文件、用户所输入的偏好信息等变量，通过变量赋值节点写入至会话变量内，用作后续对话的参考信息。
+
+<img width="432" alt="image" src="https://github.com/user-attachments/assets/7dc7b62a-c9c2-45b5-9bc1-c2206595e4a9" />
+
 
 #### 迭代
 
@@ -96,6 +138,21 @@ Array数据类型意味着该变量的实际值可能为 [1.mp3, 2.png, 3.doc]�
 + 迭代工作流：你可以在迭代节点中使用多个工作流节点，编排不同的任务步骤。
 + 输出变量：仅支持输出数组变量Array[List]。如果你想要输出其它变量格式，请阅读扩展阅读：如何将数组转换为文本。
 
+<img width="1009" alt="image" src="https://github.com/user-attachments/assets/216fcd0c-8fbf-43e7-973f-b7fe927be14c" />
+
+#### 循环
+
+循环（Loop）节点用于执行依赖前一轮结果的重复任务，直到满足退出条件或达到最大循环次数。
+
+<img width="1007" alt="image" src="https://github.com/user-attachments/assets/0fe0e875-1896-4e1a-9ed5-f8d6bdb26cdb" />
+
+
+| 类型 | 特点 | 适用场景 |
+| --- | --- | --- |
+| 循环（Loop） | 轮次之间存在依赖关系的优化型任务。即任务的每一轮执行都依赖上一轮的结果。 | 需要前一轮的计算结果，适用于递归、优化问题等。 | 
+| 迭代（Iteration） | 轮次之间无依赖关系的批处理任务。即每一轮任务可以独立运行，无需依赖前一轮。 | 每轮独立执行，可用于数据批量处理等。 | 
+
+
 #### 参数提取
 
 利用 LLM 从自然语言推理并提取结构化参数，用于后置的工具调用或 HTTP 请求。
@@ -103,6 +160,9 @@ Array数据类型意味着该变量的实际值可能为 [1.mp3, 2.png, 3.doc]�
 CoreAgent 工作流内提供了丰富的工具选择，其中大多数工具的输入为结构化参数，参数提取器可以将用户的自然语言转换为工具可识别的参数，方便工具调用。
 
 工作流内的部分节点有特定的数据格式传入要求，如迭代节点的输入要求为数组格式，参数提取器可以方便的实现结构化参数的转换。
+
+<img width="235" alt="image" src="https://github.com/user-attachments/assets/0bc5902f-3c70-4123-a246-5fc030ab488e" />
+
 
 #### HTTP 请求
 
@@ -119,15 +179,24 @@ CoreAgent 工作流内提供了丰富的工具选择，其中大多数工具的�
 
 可以通过配置 HTTP 请求的包括 URL、请求头、查询参数、请求体内容以及认证信息等。
 
+<img width="429" alt="image" src="https://github.com/user-attachments/assets/d7e2318e-4f39-4e36-ab8c-9d23c549183c" />
+
+
 #### Agent
 
 Agent 节点是 CoreAgent 对话流/工作流 中用于实现自主工具调用的组件。它通过集成不同的 Agent 推理策略，使大语言模型能够在运行时动态选择并执行工具，从而实现多步推理。
+
+<img width="436" alt="image" src="https://github.com/user-attachments/assets/afc35c49-ccc6-4e70-bb21-4ec57dd9e49f" />
+
 
 #### 工具
 
 + 插件
 + 自定义工具
 + 工作流
+
+<img width="357" alt="image" src="https://github.com/user-attachments/assets/240fa5b5-a1e4-4a03-9880-550e97345703" />
+
 
 #### 结束
 
@@ -137,9 +206,14 @@ Agent 节点是 CoreAgent 对话流/工作流 中用于实现自主工具调用�
 
 结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
 
+<img width="429" alt="image" src="https://github.com/user-attachments/assets/16dc31ad-09e0-4b61-b79e-08ebe26c06a9" />
+
+
 #### 直接回复
 
 定义一个对话流中的回复内容。
+
+与工作流结束的区别：还可以继续后置节点。
 
 你可以在文本编辑器中自由定义回复格式，包括自定义一段固定的文本内容、使用前置步骤中的输出变量作为回复内容、或者将自定义文本与变量组合后回复。
 
@@ -149,14 +223,8 @@ Agent 节点是 CoreAgent 对话流/工作流 中用于实现自主工具调用�
 + 输出生成图片
 + 输出纯文本
 
-#### 循环
+<img width="426" alt="image" src="https://github.com/user-attachments/assets/9a5075a3-8d1b-40fc-ab93-98249a1ffc26" />
 
-循环（Loop）节点用于执行依赖前一轮结果的重复任务，直到满足退出条件或达到最大循环次数。
-
-| 类型 | 特点 | 适用场景 |
-| --- | --- | --- |
-| 循环（Loop） | 轮次之间存在依赖关系的优化型任务。即任务的每一轮执行都依赖上一轮的结果。 | 需要前一轮的计算结果，适用于递归、优化问题等。 | 
-| 迭代（Iteration） | 轮次之间无依赖关系的批处理任务。即每一轮任务可以独立运行，无需依赖前一轮。 | 每轮独立执行，可用于数据批量处理等。 | 
 
 # 智能体应用
 
