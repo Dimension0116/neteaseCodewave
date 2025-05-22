@@ -18,7 +18,7 @@
 
 3. 导入DSL创建智能体
 
-可从CoreAgent或者其他平台导出DSL文件进行智能体创建
+可从CoreAgent导出DSL文件进行智能体创建
 
 <img width="573" alt="截屏2025-05-14 14 21 38" src="https://github.com/user-attachments/assets/5e60bd5a-864b-413a-8348-bf994da41848" />
 
